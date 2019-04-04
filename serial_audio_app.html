@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+
+    <title>Serial Audio App</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto:medium|Roboto:light|Roboto:thin" rel="stylesheet">
+    <!-- Custome Styles CSS -->
+    <link href="style.css" rel="stylesheet">
+
+ 	</head>
+
+	<body>
+
+        <audio id="beep">
+          <source src="beep.wav" type="audio/wav">
+          Your browser does not support the audio element.
+        </audio>
+
+        <audio id="buzz">
+          <source src="buzz.wav" type="audio/wav">
+          Your browser does not support the audio element.
+        </audio>
+
+		<div class="container d-flex flex-column justify-content-center align-items-center">
+            <h1>Super Sexy App</h1>
+			<button id="btn-beep" type="button" class="btn-primary btn-lg btn-block">BEEP</button>
+            <br/>
+            <h2>Choose Recall</h2>
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+              <label class="btn btn-secondary active">
+                <input type="radio" name="options" id="50" autocomplete="off" checked> 50%
+              </label>
+              <label class="btn btn-secondary">
+                <input type="radio" name="options" id="75" autocomplete="off"> 75%
+              </label>
+              <label class="btn btn-secondary">
+                <input type="radio" name="options" id="100" autocomplete="off"> 100%
+              </label>
+            </div>  
+		</div>
+
+        <script type="text/javascript">
+            document.getElementById("btn-beep").onclick = function(){
+                var recallButton = document.querySelector(".active");
+                var recallValue = parseFloat(recallButton.children[0].id);
+                var probability = recallValue / 100;
+                console.log(probability);
+
+                var beep = document.getElementById("beep");
+                var buzz = document.getElementById("buzz");
+
+                var playSound = function() {
+                    var num=Math.random();
+                    if(num <= probability){
+                         beep.play();
+                    }  
+                    else {
+                        buzz.play();
+                    }   
+                }
+
+                playSound();
+            }
+        </script>
+
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	</body>
+
+</html>
